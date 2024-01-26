@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magelearn_Slider::menu"
+             title="Banner Slider"
+             module="Magelearn_Slider"
+             sortOrder="99"
+             resource="Magelearn_Slider::menu"
+             parent="Magento_Backend::content"
+        />
+        <add id="Magelearn_Slider::slider"
+             title="Slider items"
+             module="Magelearn_Slider"
+             sortOrder="0"
+             action="slider/slider/"
+             resource="Magelearn_Slider::slider"
+             parent="Magelearn_Slider::menu"
+        />
+    </menu>
+</config>

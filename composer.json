@@ -1,0 +1,34 @@
+{
+    "name": "magelearn/magento2-module-slider",
+    "description": "N/A",
+    "require": {
+        "magento/magento-composer-installer": "*",
+        "php": "^7.2"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "name": "Vijay Rami",
+            "email": "vijaymrami@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/registration.php"
+        ],
+        "psr-4": {
+            "Magelearn\\Slider\\": "src"
+        }
+    },
+    "keywords": [
+        "magento2",
+        "slider",
+        "homepage"
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

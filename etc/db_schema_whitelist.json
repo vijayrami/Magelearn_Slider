@@ -1,0 +1,66 @@
+{
+    "magelearn_slider_slider": {
+        "column": {
+            "slider_id": true,
+            "title": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGELEARN_SLIDER_SLIDER_SLIDER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "magelearn_slider_slider_item": {
+        "column": {
+            "slide_id": true,
+            "slider_id": true,
+            "title": true,
+            "status": true,
+            "position": true,
+            "url": true,
+            "content": true,
+            "video": true,
+            "video_content": true,
+            "is_active_countdown": true,
+            "countdown_date_from": true,
+            "countdown_date_to": true,
+            "countdown_color": true,
+            "countdown_background_color": true,
+            "countdown_top": true,
+            "countdown_left": true,
+            "show_daily_deal": true,
+            "daily_deal_product_id": true,
+            "daily_deal_color": true,
+            "daily_deal_background_color": true,
+            "daily_deal_top": true,
+            "daily_deal_left": true,
+            "promotion_status": true,
+            "promotion_name": true,
+            "promotion_creative": true,
+            "promotion_id": true,
+            "promotion_position": true,
+            "image_mobile": true,
+            "image_thumbnail": true,
+            "image_small": true,
+            "image_medium": true,
+            "date_from": true,
+            "date_to": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGELEARN_SLIDER_SLIDER_ITEM_SLIDE_ID": true,
+            "MAGELEARN_SLIDER_SLIDER_ITEM_SLIDER_ID": true,
+            "MAGELEARN_SLIDER_SLIDER_ITEM_SLIDER_ID_STATUS_IS_ACTIVE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_7CB013567E7207DD1417AD0D6729E381": true
+        }
+    }
+}

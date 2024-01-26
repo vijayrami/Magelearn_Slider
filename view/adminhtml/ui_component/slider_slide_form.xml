@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">slider_slide_form.slide_form_data_source</item>
+            <item name="deps" xsi:type="string">slider_slide_form.slide_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Slide Form</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">slide_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magelearn\Slider\Block\Adminhtml\Slide\Edit\Back</item>
+            <item name="reset" xsi:type="string">Magelearn\Slider\Block\Adminhtml\Slide\Edit\Reset</item>
+            <item name="delete" xsi:type="string">Magelearn\Slider\Block\Adminhtml\Slide\Edit\Delete</item>
+            <item name="save" xsi:type="string">Magelearn\Slider\Block\Adminhtml\Slide\Edit\Save</item>
+            <item name="save_and_continue" xsi:type="string">Magelearn\Slider\Block\Adminhtml\Slide\Edit\SaveAndContinueEdit</item>
+        </item>
+    </argument>
+    <dataSource name="slide_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magelearn\Slider\Ui\Component\Slide\DataProvider</argument>
+            <argument name="name" xsi:type="string">slide_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">slide_id</argument>
+            <argument name="requestFieldName" xsi:type="string">slide_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <field name="slide_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">slide_id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="slider_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">slider_id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Title</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="source" xsi:type="string">title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        
+        <field name="content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Content</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="source" xsi:type="string">content</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="url" formElement="input" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">url</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Url</label>
+                <validation>
+                    <rule name="magelearn-validate-slider-url" xsi:type="boolean">true</rule>
+                </validation>
+                <visible>true</visible>
+            </settings>
+        </field>
+
+        <field name="position">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Position</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="source" xsi:type="string">position</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magelearn\Slider\Ui\Component\Form\Field\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">status</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="default" xsi:type="string">1</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="date_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Start Date</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">date_from</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataScope" xsi:type="string">date_from</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="date_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">End Date</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">date_to</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="dataScope" xsi:type="string">date_to</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    
+	    <field name="is_active_countdown" sortOrder="70" formElement="select">
+	    	<settings>
+                <dataType>text</dataType>
+                <dataScope>is_active_countdown</dataScope>
+                <label translate="true">Counter enabled</label>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_date_from</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_date_to</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_color</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_background_color</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_date_from</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_date_to</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_color</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="3">
+                                    <target>slider_slide_form.slider_slide_form.general.countdown_background_color</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+	        <argument name="data" xsi:type="array">
+	            <item name="options" xsi:type="object">Magelearn\Slider\Ui\Component\Form\Field\Countdown</item>
+	            <item name="config" xsi:type="array">
+	                <item name="source" xsi:type="string">is_active_countdown</item>
+	                <item name="default" xsi:type="string">0</item>
+	                <item name="notice" xsi:type="string">If counter is enabled then "Countdown date to" must be set, otherwise it won't be displayed</item>
+	            </item>
+	        </argument>
+	    </field>
+	    
+	    <field name="countdown_date_from">
+	        <argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="dataType" xsi:type="string">string</item>
+	                <item name="label" xsi:type="string" translate="true">Countdown date from</item>
+	                <item name="formElement" xsi:type="string">date</item>
+	                <item name="source" xsi:type="string">countdown_date_from</item>
+	                <item name="sortOrder" xsi:type="number">80</item>
+	                <item name="dataScope" xsi:type="string">countdown_date_from</item>
+	                <item name="notice" xsi:type="string">When countdown starts displaying</item>
+	                <item name="options" xsi:type="array">
+	                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+	                    <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+	                    <item name="showsTime" xsi:type="boolean">true</item>
+	                </item>
+	            </item>
+	        </argument>
+	    </field>
+	    
+	    <field name="countdown_date_to">
+	        <argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="dataType" xsi:type="string">string</item>
+	                <item name="label" xsi:type="string" translate="true">Countdown date to</item>
+	                <item name="formElement" xsi:type="string">date</item>
+	                <item name="source" xsi:type="string">countdown_date_to</item>
+	                <item name="sortOrder" xsi:type="number">90</item>
+	                <item name="dataScope" xsi:type="string">countdown_date_to</item>
+	                <item name="notice" xsi:type="string">When countdown ends displaying</item>
+	                <item name="options" xsi:type="array">
+	                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+	                    <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+	                    <item name="showsTime" xsi:type="boolean">true</item>
+	                </item>
+	            </item>
+	        </argument>
+	    </field>
+	    
+	    <field name="countdown_color" sortOrder="100"
+            formElement="colorPicker">
+            <settings>
+                <label translate="true">Countdown color</label>
+                <componentType>colorPicker</componentType>
+                <dataScope>countdown_color</dataScope>
+                <dataType>text</dataType>
+                <notice>Use CSS value like "#ffffff" or "red"</notice>
+            </settings>
+            <formElements>
+                <colorPicker>
+                    <settings>
+                        <colorPickerMode>full</colorPickerMode>
+                        <colorFormat>hex</colorFormat>
+                    </settings>
+                </colorPicker>
+            </formElements>
+        </field>
+	    
+	    <field name="countdown_background_color" sortOrder="110"
+            formElement="colorPicker">
+            <settings>
+                <label translate="true">Countdown background color</label>
+                <componentType>colorPicker</componentType>
+                <dataScope>countdown_background_color</dataScope>
+                <dataType>text</dataType>
+                <notice>Use CSS value like "#ffffff" or "red"</notice>
+            </settings>
+            <formElements>
+                <colorPicker>
+                    <settings>
+                        <colorPickerMode>full</colorPickerMode>
+                        <colorFormat>hex</colorFormat>
+                    </settings>
+                </colorPicker>
+            </formElements>
+        </field>
+    </fieldset>
+	
+	<fieldset name="daily_deal_information">
+		<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Daily Deal Information</item>
+                <item name="sortOrder" xsi:type="number">170</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        
+        <field name="show_daily_deal" sortOrder="70" formElement="select">
+        	<settings>
+                <dataType>text</dataType>
+                <dataScope>is_active_countdown</dataScope>
+                <label translate="true">Counter enabled</label>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_product_id</target>
+                                    <callback>disable</callback>
+                                </action>
+                                <action name="1">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_color</target>
+                                    <callback>disable</callback>
+                                </action>
+                                <action name="2">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_background_color</target>
+                                    <callback>disable</callback>
+                                </action>
+                                <action name="3">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_top</target>
+                                    <callback>disable</callback>
+                                </action>
+                                <action name="4">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_left</target>
+                                    <callback>disable</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_product_id</target>
+                                    <callback>enable</callback>
+                                </action>
+                                <action name="1">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_color</target>
+                                    <callback>enable</callback>
+                                </action>
+                                <action name="2">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_background_color</target>
+                                    <callback>enable</callback>
+                                </action>
+                                <action name="3">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_top</target>
+                                    <callback>enable</callback>
+                                </action>
+                                <action name="3">
+                                    <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_left</target>
+                                    <callback>enable</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magelearn\Slider\Ui\Component\Form\Field\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Show daily deal</item>
+                    <item name="source" xsi:type="string">show_daily_deal</item>
+                    <item name="dataScope" xsi:type="string">show_daily_deal</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="daily_deal_product_id" component="Magelearn_Slider/js/components/select-product" formElement="select" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filterOptions" xsi:type="boolean">true</item><!--to add filter in select-ui-->
+                    <item name="multiple" xsi:type="boolean">true</item><!--select multiple or not-->
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <!-- checkbox will not display if multiple == false -->
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <required>false</required>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+                <label translate="true">Select Product</label>
+                <dataScope>daily_deal_product_id</dataScope>
+                <componentType>field</componentType>
+                <listens>
+                    <link name="${ $.namespace }.${ $.namespace }:responseData">setParsed</link>
+                </listens>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magelearn\Slider\Ui\Component\Create\Form\Product\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="daily_deal_color" sortOrder="100"
+            formElement="colorPicker">
+            <settings>
+                <label translate="true">Daily Deal Color</label>
+                <componentType>colorPicker</componentType>
+                <dataScope>daily_deal_color</dataScope>
+                <dataType>text</dataType>
+                <notice>Use CSS value like "#ffffff" or "red"</notice>
+            </settings>
+            <formElements>
+                <colorPicker>
+                    <settings>
+                        <colorPickerMode>full</colorPickerMode>
+                        <colorFormat>hex</colorFormat>
+                    </settings>
+                </colorPicker>
+            </formElements>
+        </field>
+        <field name="daily_deal_background_color" sortOrder="110"
+            formElement="colorPicker">
+            <settings>
+                <label translate="true">Daily Deal Background Color</label>
+                <componentType>colorPicker</componentType>
+                <dataScope>daily_deal_background_color</dataScope>
+                <dataType>text</dataType>
+                <notice>Use CSS value like "#f0f0f0" or "white"</notice>
+            </settings>
+            <formElements>
+                <colorPicker>
+                    <settings>
+                        <colorPickerMode>full</colorPickerMode>
+                        <colorFormat>hex</colorFormat>
+                    </settings>
+                </colorPicker>
+            </formElements>
+        </field>
+        
+        <field name="daily_deal_top">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Daily Deal Top</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">daily_deal_top</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                    <item name="dataScope" xsi:type="string">daily_deal_top</item>
+                    <item name="notice" xsi:type="string">Use CSS unit value like "20px" or "10%", hyphen is allowed, then top becomes dottom</item>
+                </item>
+            </argument>
+        </field>
+        <field name="daily_deal_left">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Daily Deal left</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">daily_deal_left</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                    <item name="dataScope" xsi:type="string">daily_deal_left</item>
+                    <item name="notice" xsi:type="string">Use CSS unit value like "10px" or "15%", hyphen is allowed, then left becomes right</item>
+                </item>
+            </argument>
+        </field>
+	</fieldset>
+	
+	<fieldset name="video_information">
+		<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Video</item>
+                <item name="sortOrder" xsi:type="number">180</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="video">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magelearn\Slider\Ui\Component\Form\Field\Video</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Video source</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">video</item>
+                    <item name="dataScope" xsi:type="string">video</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="admin__field-min-height">true</class>
+                </additionalClasses>
+                <tooltip>
+                    <description translate="true">
+                        <![CDATA[
+                        <span style="color: blue;">
+                        	<p>If video content is there then only video will be display on full screen slide.</p>
+                        </span>
+                        ]]>
+                    </description>
+                </tooltip>
+            </settings>
+        </field>
+        <field name="video_content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Video content</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="source" xsi:type="string">video_content</item>
+                    <item name="label" xsi:type="string" translate="true">Add URL of Video</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="admin__field-min-height">true</class>
+                </additionalClasses>
+                <tooltip>
+                    <description translate="true">
+                        <![CDATA[
+                        <ol>
+                        	<li>For You Tube: Add embed url like "https://www.youtube.com/embed/xxxxxxx", replace xxxxxxx with your you tube id.</li>
+                        	<li>For Vimeo: Add embed url like "https://player.vimeo.com/video/xxxxxxx", replace xxxxxxx with your Vimeo id.</li>
+                        	<li>For HTML: Add your hosted video url "https://yourdomain.com/path_to_video.mp4".</li>
+                        </ol>
+                        ]]>
+                    </description>
+                </tooltip>
+            </settings>
+        </field>
+	</fieldset>
+	
+    <fieldset name="images_information">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Images</item>
+                <item name="sortOrder" xsi:type="number">190</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="image_thumbnail" sortOrder="10" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="baseTmpPath" xsi:type="string">slider/tmp/images</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="previewTmpl" xsi:type="string">Magelearn_Slider/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="slider/slide_image/upload"/>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <label translate="true">Thumbnail</label>
+            </settings>
+        </field>
+
+        <field name="image_medium" sortOrder="20" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="baseTmpPath" xsi:type="string">slider/tmp/images</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="previewTmpl" xsi:type="string">Magelearn_Slider/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="slider/slide_image/upload"/>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <label translate="true">Image for desktop</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="image_small" sortOrder="30" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="baseTmpPath" xsi:type="string">slider/tmp/images</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="previewTmpl" xsi:type="string">Magelearn_Slider/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="slider/slide_image/upload"/>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <label translate="true">Image for tablet</label>
+            </settings>
+        </field>
+
+        <field name="image_mobile" sortOrder="40" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="baseTmpPath" xsi:type="string">slider/tmp/images</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="previewTmpl" xsi:type="string">Magelearn_Slider/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="slider/slide_image/upload"/>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <label translate="true">Image for mobile</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>

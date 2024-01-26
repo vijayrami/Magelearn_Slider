@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magelearn_modules" translate="label" sortOrder="10">
+            <label>Magelearn Modules</label>
+        </tab>
+        <section id="magelearn_slider" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Slider</label>
+            <tab>magelearn_modules</tab>
+            <resource>Magelearn_Slider::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="is_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="display_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display settings</label>
+                <field id="autoplay" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable autoplay</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="accessibility" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Accessibility</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>It Enables tabbing and arrow key navigation</comment>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="autoplay_speed" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Slider autoplay speed</label>
+                    <depends>
+                        <field id="autoplay">1</field>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                    <comment>Time in milliseconds</comment>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="speed" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Slide/Fade animation speed</label>
+                    <depends>
+                        <field id="autoplay">1</field>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                    <comment>Time in milliseconds</comment>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="pause_on_focus" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pause on focus</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="pause_on_hover" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pause on hover</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="pause_on_dots_hover" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pause on Dots hover</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Pause Autoplay when a dot is hovered</comment>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="slides_to_show" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Slides to show</label>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="slides_to_scroll" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Slides to scroll</label>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="show_arrows" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show arrows</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="show_dots" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Dots</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="infinite_loop" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Infinite loop</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="lazy_load" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Lazy Load</label>
+                    <source_model>Magelearn\Slider\Model\Config\Source\Lazyload</source_model>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="css_ease" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>cssEase</label>
+                    <comment>CSS3 Animation Easing. You can add values like (ease, linear or custom css animation)</comment>
+                    <depends>
+                        <field id="magelearn_slider/general/is_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

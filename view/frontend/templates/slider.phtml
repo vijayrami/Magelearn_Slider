@@ -1,0 +1,184 @@
+<?php
+use Magelearn\Slider\Block\Slider;
+use Magento\Framework\Escaper;
+use Magento\Framework\App\Action\Action;
+
+/**
+ * @var Slider  $block
+ * @var Escaper $escaper
+ */
+?>
+<?php if ($block->isEnabled()): ?>
+	<?php $slides = $block->getSlides(); ?>
+
+    <?php if (count($slides) > 0): ?>
+    <aside class="slick__maincontainer">
+            <div class="slick__wrapper">
+            	<section class="lazy slider main-slider"
+                         data-mage-init='{ "magelearn.slider": <?= /* @noEscape */ $block->getSliderConfig(); ?> }'>
+                         <?php foreach ($slides as $i => $slide): ?>
+                         	<?php
+                                $videocontent = '';
+                                if ($slide->getVideo() != 0) {
+                                    $videocontent = $block->getVideoContent($slide->getVideoContent(), $slide->getVideo());
+                                }
+                            ?>
+                         	<div class="slide
+                         	<?php if ($slide->getVideo() == 1 && $videocontent !== ''): ?>youtube-sound video
+                         	<?php elseif ($slide->getVideo() == 2 && $videocontent !== ''): ?>vimeo video
+                         	<?php elseif ($slide->getVideo() == 3 && $videocontent !== ''): ?>html video
+                                <?php else: ?><?php endif; ?>"
+                                 data-title="<?= $block->escapeHtmlAttr($slide->getTitle()); ?>"
+                                 data-url="<?= $block->escapeUrl($slide->getUrl()); ?>"
+                                 data-image="<?= $block->escapeUrl($block->getFileUrl($slide->getImageMedium())); ?>"
+                                >
+                                <?php if ($videocontent !== ''): ?>
+                                	<?= /* @noEscape */ $block->getVideoContent($slide->getVideoContent(), $slide->getVideo()); ?>
+                                <?php else: ?>
+                                <div class="slide__img">
+                                	<picture>
+                                    <source data-lazy-srcset="<?= $block->escapeUrl($block->getFileUrl($slide->getImageMedium())); ?>"
+                                            media="(min-width: 1024px)">
+                                    <?php if ($slide->getImageSmall()): ?>
+                                        <source srcset="<?= $block->getFileUrl($slide->getImageSmall()); ?>"
+                                                media="(min-width: 480px)">
+                                    <?php endif; ?>
+                                    <?php if ($slide->getImageMobile()): ?>
+                                        <source srcset="<?= $block->getFileUrl($slide->getImageMobile()); ?>"
+                                                media="(min-width: 320px)">
+                                    <?php endif; ?>
+                                    <img class="slider__content slide-image"
+                                         <?php if ($i == 0): ?>
+                                             data-exclude_webp_lazyload="true"
+                                             src="<?= $block->escapeUrl($block->getFileUrl($slide->getImageMedium())); ?>"
+                                         <?php else: ?>
+                                             data-lazy="<?= $block->escapeUrl($block->getFileUrl($slide->getImageMedium())); ?>"
+                                         <?php endif; ?>
+                                         alt="<?= $block->escapeHtmlAttr($slide->getTitle()); ?>"/>
+                                     </picture>
+                                </div>
+                                <div class="slide__content">
+                                    <div class="slide__content--headings">
+                                       <h2 class="animated" data-animation-in="fadeInUp"><?= /* @noEscape */ $slide->getTitle(); ?></h2>
+                                       <p class="animated" data-animation-in="fadeInUp" data-delay-in="0.3"><?= /* @noEscape */ $slide->getContent(); ?></p>
+                                       <?php if ($block->displayCountdown($slide)): ?>
+                                            <?php $date = new DateTime($slide->getCountdownDateTo()); ?>
+                                            <?php $countdownColor = $slide->getCountdownColor() ?>
+                                            <?php $countdownBackgroundColor = $slide->getCountdownBackgroundColor() ?>
+                                            <?php $itemStyle = $block->getStyles($countdownColor, $countdownBackgroundColor); ?>
+                                            <!-- timestamp * 1000 because it converts to the JavaScript -->
+                                            <div id="countdowntimer" class="countdowntimer" <?= /* @noEscape */ $itemStyle ?>>
+                                            	<span class="future_date" data-mage-init='{"countdownTimerInit":
+                                            	{
+                                            	 "startDate": "<?php echo date('Y/m/d H:i:s'); ?>",
+                                            	 "dateAndTime": "<?php echo $slide->getCountdownDateTo(); ?>"}
+                                            	}'><span>
+                                           	</div>
+                                        <?php endif; ?>
+                                        <?php if ($block->displayDailyDealInformation($slide)): ?>
+                                            <?php $dailyDealProductId = explode(",", $slide->getDailyDealProductId()); ?>
+                                            <?php $dailyDealProductIdCount = count($dailyDealProductId); ?>
+                                            <?php $dailyDealColor = $slide->getDailyDealColor() ?>
+                                            <?php $dailyDealBackgroundColor = $slide->getDailyDealBackgroundColor() ?>
+                                            <?php $itemStyle = $block->getStyles($dailyDealColor, $dailyDealBackgroundColor); ?>
+                                            <?php if (is_array($dailyDealProductId) && count($dailyDealProductId) > 0): ?>
+                                                <div class="daily_deal__container" <?= /* @noEscape */ $block->getWrapperPosition(
+                                            $slide->getDailyDealTop(),
+                                            $slide->getDailyDealLeft()
+                                        ) ?>>
+                                                	<?php
+                                                    $type = 'widget-product-grid';
+                                                    $mode = 'grid';
+                                                    $image = 'new_products_content_widget_grid';
+                                                    $showWishlist = false;
+                                                    $showCompare = false;
+                                                    $showCart = true;
+                                                    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+                                                    $description = false;
+                                                    ?>
+                                                    <?php foreach ($dailyDealProductId as $productId): ?>
+                                                    <?php if ($product = $block->getProduct($productId)): ?>
+                                                	<div class="item" style="width: calc((100% - 8%) / <?= $dailyDealProductIdCount ?>);">
+                                                        <a href="<?= $block->escapeUrl($block->getProductUrl($product)) ?>" class="product-item-photo" target="_blank">
+                                                        	<?php
+                                                            $imageId = 'product_base_image';
+                                                            $width = 100;
+                                                            $height = 200;
+                                                            $sku = $product->getSku();
+                                                            $_product = $block->getProductBySku($sku);
+                                                            $resizedImageUrl = $block->resizeImage($_product, 'product_base_image', $width, $height)->getUrl();
+                                                            ?>
+                                                            <img src="<?php echo $resizedImageUrl;?>" alt="<?= $block->escapeHtml($product->getName()) ?>" />
+                                                        </a>
+                                                    	<div class="product-item-details">
+                                                    		<strong class="product-item-name">
+                                                    			<?= $block->escapeHtml($product->getName()) ?>
+                                                    		</strong>
+                                                    		<?php if ($templateType): ?>
+                                                                <?= $block->getReviewsSummaryHtml($product, $templateType) ?>
+                                                            <?php endif; ?>
+                                                    		<?= $block->getProductPriceHtml($product, $type) ?>
+ 
+                                							<?= $block->getProductDetailsHtml($product) ?>
+                                							<?php if ($showWishlist || $showCompare || $showCart): ?>
+                                                                <div class="product-item-inner-checkout">
+                                                                    <div class="product-item-actions">
+                                                                    	<?php if ($showCart): ?>
+                                                                            <div class="actions-primary">
+                                                                                <?php if ($product->isSaleable()): ?>
+                                                                                    <?php $postParams = $block->getAddToCartPostParams($product); ?>
+                                                                                    <form data-role="tocart-form" data-product-sku="<?= $block->escapeHtml($product->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
+                                                                                        <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr($postParams['data']['product']) ?>">
+                                                                                        <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+                                                                                        <input type="hidden" name="form_key" value="<?= /* @noEscape */ $block->getFormKey() ?>" />
+                                                                                        <button type="submit"
+                                                                                                title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
+                                                                                                class="action tocart primary">
+                                                                                            <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                                                        </button>
+                                                                                    </form>
+                                                                                <?php else: ?>
+                                                                                    <?php if ($product->isAvailable()): ?>
+                                                                                        <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+                                                                                    <?php else: ?>
+                                                                                        <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                                                    <?php endif; ?>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        <?php endif; ?>
+                                                                        <?php if ($showWishlist || $showCompare): ?>
+                                                                            <div class="actions-secondary" data-role="add-to-links">
+                                                                                <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist): ?>
+                                                                                    <a href="#"
+                                                                                       data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($product) ?>' class="action towishlist" data-action="add-to-wishlist" title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>">
+                                                                                        <span><?= $block->escapeHtml(__('Add to Wish List')) ?></span>
+                                                                                    </a>
+                                                                                <?php endif; ?>
+                                                                                <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                                                                    <?php $compareHelper = $this->helper(\Magento\Catalog\Helper\Product\Compare::class);?>
+                                                                                    <a href="#" class="action tocompare" data-post='<?= /* @noEscape */ $compareHelper->getPostDataParams($product) ?>' title="<?= $block->escapeHtmlAttr(__('Add to Compare')) ?>">
+                                                                                        <span><?= $block->escapeHtml(__('Add to Compare')) ?></span>
+                                                                                    </a>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                    	</div>
+                                                   	</div>
+                                                   	<?php endif ?>
+                                                   	<?php endforeach ?>
+                                                </div>
+                                            <?php endif ?>
+                                        <?php endif ?>
+                                    </div>
+                              	</div>
+                              	<?php endif; ?>
+                            </div>
+                         <?php endforeach; ?>
+                </section>
+    		</div>
+   	</aside>
+    <?php endif; ?>
+<?php endif; ?>

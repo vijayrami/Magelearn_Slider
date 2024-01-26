@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="MagelearnSliderSliderItemGrid" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magelearn_slider_slider_item</argument>
+            <argument name="resourceModel" xsi:type="string">Magelearn\Slider\Model\ResourceModel\Slide</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MagelearnSliderSliderEntityGrid" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magelearn_slider_slider</argument>
+            <argument name="resourceModel" xsi:type="string">Magelearn\Slider\Model\ResourceModel\Slider</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="slide_grid_data_source" xsi:type="string">MagelearnSliderSliderItemGrid</item>
+                <item name="slider_grid_data_source" xsi:type="string">MagelearnSliderSliderEntityGrid</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magelearn\Slider\Controller\Adminhtml\Slide\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magelearn\Slider\SlideImageUpload</argument>
+        </arguments>
+    </type>
+    <virtualType name="Magelearn\Slider\SlideImageUpload" type="Magelearn\Slider\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">slider/tmp/images</argument>
+            <argument name="basePath" xsi:type="string">slider/images/upload</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="svg" xsi:type="string">svg</item>
+                <item name="gif" xsi:type="string">gif</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- preferences for Interfaces -->
+    <preference for="Magelearn\Slider\Api\SlideRepositoryInterface" type="Magelearn\Slider\Model\SlideRepository" />
+    <preference for="Magelearn\Slider\Api\SliderRepositoryInterface" type="Magelearn\Slider\Model\SliderRepository" />
+    <preference for="Magelearn\Slider\Api\SliderManagementInterface" type="Magelearn\Slider\Model\SliderManagement" />
+    <preference for="Magelearn\Slider\Api\Data\SlideInterface" type="Magelearn\Slider\Model\Slide"/>
+    <preference for="Magelearn\Slider\Api\Data\SliderInterface" type="Magelearn\Slider\Model\Data\Slider" />
+    <preference for="Magelearn\Slider\Api\Data\SlideSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Magelearn\Slider\Api\Data\SliderSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+</config>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magelearn_slider_slider" resource="default" engine="innodb" comment="Slider entities table">
+        <column xsi:type="int" name="slider_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id" />
+        <column xsi:type="text" name="title" nullable="true" comment="Slider title" />
+        <column xsi:type="smallint" name="status" default="1" nullable="false" unsigned="true" comment="Slider status" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At" />
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="slider_id"/>
+        </constraint>
+        <index referenceId="MAGELEARN_SLIDER_SLIDER_SLIDER_ID" indexType="btree">
+            <column name="slider_id"/>
+        </index>
+    </table>
+    <table name="magelearn_slider_slider_item" resource="default" engine="innodb" comment="Slider items table">
+        <column xsi:type="int" name="slide_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id" />
+        <column xsi:type="int" name="slider_id" padding="10" unsigned="true" nullable="false" comment="Parent slider Id" />
+        <column xsi:type="text" name="title" nullable="true" comment="Slide title" />
+        <column xsi:type="smallint" name="status" default="1" nullable="false" unsigned="true" comment="Slide status" />
+        <column xsi:type="smallint" name="position" default="1" nullable="false" comment="Slide position" />
+        <column xsi:type="text" name="url" nullable="true" comment="Slide URL" />
+		
+		<column xsi:type="text" name="content" nullable="true" comment="Slide content"/>
+        <column xsi:type="smallint" name="video" default="0" nullable="false" unsigned="true" comment="Slide video type"/>
+        <column xsi:type="text" name="video_content" nullable="true" comment="Slide video content"/>
+
+        <column xsi:type="smallint" name="is_active_countdown" default="0" nullable="false" unsigned="true" comment="Countdown status"/>
+        <column xsi:type="timestamp" name="countdown_date_from" nullable="true" default="NULL" comment="Countdown date from"/>
+        <column xsi:type="timestamp" name="countdown_date_to" nullable="true" default="NULL" comment="Countdown date to"/>
+        <column xsi:type="text" name="countdown_color" nullable="true" comment="Countdown color"/>
+        <column xsi:type="text" name="countdown_background_color" nullable="true" comment="Countdown background color"/>
+
+        <column xsi:type="smallint" name="show_daily_deal" default="0" nullable="false" unsigned="true" comment="Show daily deal"/>
+        <column xsi:type="text" name="daily_deal_product_id" nullable="true" comment="Daily deal product ID"/>
+        <column xsi:type="text" name="daily_deal_color" nullable="true" comment="Daily deal color"/>
+        <column xsi:type="text" name="daily_deal_background_color" nullable="true" comment="Daily deal background color"/>
+        <column xsi:type="text" name="daily_deal_top" nullable="true" comment="Daily deal top position"/>
+        <column xsi:type="text" name="daily_deal_left" nullable="true" comment="Daily deal left position"/>
+
+        <column xsi:type="text" name="image_mobile" nullable="true" comment="Slide mobile image" />
+        <column xsi:type="text" name="image_thumbnail" nullable="true" comment="Slide thumbnail image" />
+        <column xsi:type="text" name="image_small" nullable="true" comment="Slide small size image" />
+        <column xsi:type="text" name="image_medium" nullable="true" comment="Slide medium size image" />
+
+        <column xsi:type="timestamp" name="date_from" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Slide start date" />
+        <column xsi:type="timestamp" name="date_to" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Slide end date" />
+        <column xsi:type="boolean" name="is_active" default="0" nullable="false" comment="Flag that is set to true, if slide should be visible based on dates range"/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At" />
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="slide_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="MAGELEARN_SLIDER_SLIDER_ITEM_SLIDER_ID_MAGELEARN_SLIDER_SLIDER_SLIDER_ID"
+                    table="magelearn_slider_slider_item"
+                    column="slider_id"
+                    referenceTable="magelearn_slider_slider"
+                    referenceColumn="slider_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MAGELEARN_SLIDER_SLIDER_ITEM_SLIDE_ID" indexType="btree">
+            <column name="slide_id"/>
+        </index>
+        <index referenceId="MAGELEARN_SLIDER_SLIDER_SLIDER_ID" indexType="btree">
+            <column name="slider_id"/>
+        </index>
+        <index referenceId="MAGELEARN_SLIDER_SLIDER_SLIDER_ID_STATUS_IS_ACTIVE" indexType="btree">
+            <column name="slider_id"/>
+            <column name="status"/>
+            <column name="is_active"/>
+        </index>
+    </table>
+</schema>
