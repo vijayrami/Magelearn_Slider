@@ -99,9 +99,10 @@ class DataProvider extends ModifierPoolDataProvider
             foreach (self::IMAGE_PARAMS as $imageParam) {
                 $data = $this->addImage($data, $imageParam);
             }
-
             $this->loadedData[$slide->getId()] = $data;
-            $this->loadedData[$slide->getId()]['daily_deal_product_id'] = explode(",", $slide->getData('daily_deal_product_id'));
+            if(isset($data['daily_deal_product_id']) && !empty($data['daily_deal_product_id'])) {
+                $this->loadedData[$slide->getId()]['daily_deal_product_id'] = explode(",", $slide->getData('daily_deal_product_id'));
+            }
         }
 
         $data = $this->dataPersistor->get(self::DATA_PERSISTOR_KEY);

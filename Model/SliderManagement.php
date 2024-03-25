@@ -45,7 +45,7 @@ class SliderManagement implements SliderManagementInterface
         $this->searchCriteriaBuilder->addFilter(SlideInterface::SLIDER_ID, $sliderId);
 
         if ($onlyEnabled) {
-            //$this->searchCriteriaBuilder->addFilter(SlideInterface::IS_ACTIVE, 1);
+            $this->searchCriteriaBuilder->addFilter(SlideInterface::IS_ACTIVE, 1);
             $this->searchCriteriaBuilder->addFilter(SlideInterface::STATUS, 1);
         }
 
