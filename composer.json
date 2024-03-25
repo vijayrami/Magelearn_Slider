@@ -1,6 +1,6 @@
 {
     "name": "magelearn/magento2-module-slider",
-    "description": "N/A",
+    "description": "Magento2 homepage banner and product slider extension with countdown timer. Add YouTube, Vimeo and HTML Video on Homepage as slider. Also Display Products on slider with Countdown timer to display like a deals. Auto Enable/Disable slider with Cron job.",
     "require": {
         "magento/magento-composer-installer": "*",
         "php": "^7.2"
