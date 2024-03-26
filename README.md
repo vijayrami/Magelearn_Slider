@@ -2,8 +2,7 @@
 #### Magento2 homepage banner and product slider extension with countdown timer.
 ##### Add YouTube, Vimeo and HTML Video on Homepage as slider. Also Display Products on slider with Countdown timer to display like a deals.
 
-### After uploading the slide just run
-  `php bin/magento cron:run` command to activate the slider.
+### After uploading the slide just run `php bin/magento cron:run` command to activate the slider.
 
 ## Screenshots
 
