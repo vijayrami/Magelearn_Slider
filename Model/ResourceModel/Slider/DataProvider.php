@@ -23,6 +23,8 @@ class DataProvider extends AbstractDataProvider
      */
     private $dataObjectProcessor;
 
+    protected $loadedData;
+
     /**
      * DataProvider constructor.
      * @param string $name

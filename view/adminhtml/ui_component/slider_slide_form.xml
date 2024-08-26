@@ -344,8 +344,8 @@
         <field name="show_daily_deal" sortOrder="70" formElement="select">
         	<settings>
                 <dataType>text</dataType>
-                <dataScope>is_active_countdown</dataScope>
-                <label translate="true">Counter enabled</label>
+                <dataScope>show_daily_deal</dataScope>
+                <label translate="true">Daily Deal enabled</label>
                 <switcherConfig>
                     <rules>
                         <rule name="0">
@@ -392,7 +392,7 @@
                                     <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_top</target>
                                     <callback>enable</callback>
                                 </action>
-                                <action name="3">
+                                <action name="4">
                                     <target>slider_slide_form.slider_slide_form.daily_deal_information.daily_deal_left</target>
                                     <callback>enable</callback>
                                 </action>
@@ -501,7 +501,7 @@
                     <item name="label" xsi:type="string" translate="true">Daily Deal left</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">daily_deal_left</item>
-                    <item name="sortOrder" xsi:type="number">120</item>
+                    <item name="sortOrder" xsi:type="number">130</item>
                     <item name="dataScope" xsi:type="string">daily_deal_left</item>
                     <item name="notice" xsi:type="string">Use CSS unit value like "10px" or "15%", hyphen is allowed, then left becomes right</item>
                 </item>
